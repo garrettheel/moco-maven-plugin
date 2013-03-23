@@ -1,5 +1,7 @@
 package com.garrettheel.moco;
 
+import com.github.dreamhead.moco.runner.Runner;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
@@ -13,9 +15,11 @@ public class StopMonitor extends Thread {
 
     private String key;
     private ServerSocket serverSocket;
+    private Runner runner;
 
-    public StopMonitor(int port, String key) throws IOException {
+    public StopMonitor(Runner runner, int port, String key) throws IOException {
         this.key = key;
+        this.runner = runner;
 
         this.setDaemon(true);
         this.setName("MocoStopPluginMonitor");
@@ -44,7 +48,8 @@ public class StopMonitor extends Thread {
                     e.printStackTrace();
                 }
 
-                System.exit(0);
+                runner.stop();
+                break;
 
             } catch (IOException e) {
                 e.printStackTrace();

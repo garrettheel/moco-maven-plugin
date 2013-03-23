@@ -1,7 +1,6 @@
 package com.garrettheel.moco;
 
-import com.github.dreamhead.moco.runner.DynamicRunner;
-import com.github.dreamhead.moco.runner.Runner;
+import com.github.dreamhead.moco.bootstrap.Main;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -11,11 +10,11 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.io.File;
 
 /**
- * Starts a Moco server with a config file and port number. Note that the server will
- * be run asynchronously and can be stopped using the `stop` goal.
+ * Runs a Moco server with a config file and port number. Note that the server will run
+ * synchronously and can be stopped by killing the process.
  */
-@Mojo(name = "start")
-public class MocoStartMojo extends AbstractMojo {
+@Mojo( name="run" )
+public class MocoRunMojo extends AbstractMojo {
 
     /**
      * The file containing the JSON configuration.
@@ -29,22 +28,22 @@ public class MocoStartMojo extends AbstractMojo {
     @Parameter(required = true)
     private Integer port;
 
-    /**
-     * The port to stop the server on (optional).
-     */
-    @Parameter(required = false, defaultValue = "8082")
-    private Integer stopPort;
-
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         checkParams();
 
-        Runner runner = new DynamicRunner(configFile.getAbsolutePath(), port);
-        runner.run();
+        Main.main(new String[]{
+                "-p", String.format("%d", port),    // port
+                configFile.getAbsolutePath()        // config file
+        });
 
         getLog().info("Started Moco server on port " + port);
 
-        waitForStopSignal(runner);
-
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void checkParams() throws MojoExecutionException {
@@ -54,18 +53,5 @@ public class MocoStartMojo extends AbstractMojo {
         if (port == null || port < 1) {
             throw new MojoExecutionException("Invalid port number specified.");
         }
-        if (stopPort == null || stopPort < 1) {
-            throw new MojoExecutionException("Invalid stop port number specified.");
-        }
     }
-
-    private void waitForStopSignal(Runner runner) {
-        try {
-            Thread monitor = new StopMonitor(runner, stopPort, StopMonitor.MONITOR_KEY);
-            monitor.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }

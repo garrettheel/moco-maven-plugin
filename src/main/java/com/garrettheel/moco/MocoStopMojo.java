@@ -20,7 +20,7 @@ public class MocoStopMojo extends AbstractMojo {
     /**
      * The port to stop the server on.
      */
-    @Parameter(required = false)
+    @Parameter(required = false, defaultValue = "8082")
     private Integer stopPort;
 
 
