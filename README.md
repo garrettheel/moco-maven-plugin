@@ -1,7 +1,7 @@
 Overview
 =============
 
-This is a simple Maven plugin for managing a [Moco] (https://github.com/dreamhead/moco) server. It can be used to simplify manual running of the server or to automatically launch the server during some part of the maven lifecycle (such as `integration-test`).
+This is a simple Maven plugin for managing a [Moco] (https://github.com/dreamhead/moco) server. It can be used to simplify manual running of the server or to automatically launch the server during some part of the Maven lifecycle (such as `integration-test`).
 
 Usage
 =============
@@ -10,13 +10,12 @@ To get started, add the plugin to your `pom.xml`.
 
 ```xml
 <plugin>
-    <groupId>moco-maven-plugin</groupId>
+    <groupId>com.garrettheel</groupId>
     <artifactId>moco-maven-plugin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <configuration>
         <port>8081</port>
         <configFile>config.json</configFile>
-        <stopPort>8082</stopPort> <!-- Optional - only if using stop -->
     </configuration>
 </plugin>
 ```
@@ -39,10 +38,6 @@ You can also configure maven to start and stop the Moco server during the build 
 <plugin>
     <groupId>com.garrettheel</groupId>
     <!-- ... -->
-    <configuration>
-        <port>8081</port>
-        <configFile>config.json</configFile>
-    </configuration>
     <executions>
         <execution>
             <id>start-moco</id>
