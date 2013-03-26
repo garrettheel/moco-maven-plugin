@@ -20,6 +20,17 @@ To get started, add the plugin to your `pom.xml`.
 </plugin>
 ```
 
+You may also need to add the Sonatype repository, depending on your setup.
+
+```xml
+<pluginRepositories>
+    <pluginRepository>
+        <id>sonatype</id>
+        <url>https://oss.sonatype.org/content/repositories/public/</url>
+    </pluginRepository>
+</pluginRepositories>
+```
+
 ## Running manually
 
 Starting the server manually is easy! Simply run the following command:
