@@ -9,21 +9,34 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <name>Moco Maven Plugin</name>
+    <description>A maven plugin for managing a Moco stub server.</description>
+    <url>https://github.com/GarrettHeel/moco-maven-plugin</url>
+
+    <licenses>
+        <license>
+            <name>MIT license</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>git@github.com:GarrettHeel/moco-maven-plugin.git</url>
+        <connection>scm:git@github.com:GarrettHeel/moco-maven-plugin.git</connection>
+    </scm>
 
     <developers>
         <developer>
             <name>Garrett Heel</name>
-            <email>garrett.heel@gmail.com</email>
+            <email>garrettheel@gmail.com</email>
         </developer>
     </developers>
-
-    <repositories>
-        <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -37,7 +50,6 @@
             <version>3.2</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.github.dreamhead</groupId>
             <artifactId>moco-runner</artifactId>
