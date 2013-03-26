@@ -26,7 +26,7 @@ public class MocoStopMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        if (stopPort == null || stopPort <= 0) {
+        if (stopPort == null || stopPort < 1) {
             throw new MojoExecutionException("Stop port must be specified.");
         }
 
