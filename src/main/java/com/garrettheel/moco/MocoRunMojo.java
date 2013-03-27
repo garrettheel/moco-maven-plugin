@@ -1,6 +1,7 @@
 package com.garrettheel.moco;
 
-import com.github.dreamhead.moco.bootstrap.Main;
+import com.github.dreamhead.moco.runner.DynamicRunner;
+import com.github.dreamhead.moco.runner.Runner;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -32,10 +33,8 @@ public class MocoRunMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         checkParams();
 
-        Main.main(new String[]{
-                "-p", String.format("%d", port),    // port
-                configFile.getAbsolutePath()        // config file
-        });
+        Runner runner = new DynamicRunner(configFile.getAbsolutePath(), port);
+        runner.run();
 
         getLog().info("Started Moco server on port " + port);
 
