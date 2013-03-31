@@ -15,19 +15,7 @@ import java.io.File;
  * synchronously and can be stopped by killing the process.
  */
 @Mojo( name="run" )
-public class MocoRunMojo extends AbstractMojo {
-
-    /**
-     * The file containing the JSON configuration.
-     */
-    @Parameter(required = true)
-    private File configFile;
-
-    /**
-     * The port to start the server on.
-     */
-    @Parameter(required = true)
-    private Integer port;
+public class MocoRunMojo extends AbstractMocoExecutionMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -41,16 +29,9 @@ public class MocoRunMojo extends AbstractMojo {
         try {
             Thread.currentThread().join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            runner.stop();
         }
     }
 
-    private void checkParams() throws MojoExecutionException {
-        if (!configFile.exists()) {
-            throw new MojoExecutionException("Moco config file does not exist.");
-        }
-        if (port == null || port < 1) {
-            throw new MojoExecutionException("Invalid port number specified.");
-        }
-    }
+
 }

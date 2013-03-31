@@ -15,14 +15,7 @@ import java.net.Socket;
  * Stops a Moco server that is already running.
  */
 @Mojo(name = "stop")
-public class MocoStopMojo extends AbstractMojo {
-
-    /**
-     * The port to stop the server on.
-     */
-    @Parameter(required = false, defaultValue = "8082")
-    private Integer stopPort;
-
+public class MocoStopMojo extends AbstractMocoExecutionMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
