@@ -11,6 +11,8 @@ import java.io.File;
  */
 public abstract class AbstractMocoExecutionMojo extends AbstractMojo {
 
+    protected static String MONITOR_KEY = "_MOCO_MAVEN_PLUGIN_MONITOR_KEY";
+
     /**
      * The file containing the JSON configuration.
      */
