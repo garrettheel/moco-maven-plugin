@@ -1,8 +1,7 @@
 package com.garrettheel.moco;
 
-import com.github.dreamhead.moco.runner.DynamicRunner;
-import com.github.dreamhead.moco.runner.SocketShutdownMonitorRunner;
-import com.github.dreamhead.moco.runner.Runner;
+import com.github.dreamhead.moco.bootstrap.StartArgs;
+import com.github.dreamhead.moco.runner.RunnerFactory;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -17,10 +16,8 @@ public class MocoStartMojo extends AbstractMocoExecutionMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         checkParams();
 
-        Runner dynamicRunner = new DynamicRunner(configFile.getAbsolutePath(), port);
-        Runner runner = new SocketShutdownMonitorRunner(dynamicRunner, stopPort, MONITOR_KEY);
-
-        runner.run();
+        StartArgs startArgs = new StartArgs(port, stopPort, configFile.getAbsolutePath(), null, null);
+        new RunnerFactory(stopPort, MONITOR_KEY).createRunner(startArgs).run();
     }
 
     @Override

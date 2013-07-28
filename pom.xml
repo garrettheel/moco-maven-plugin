@@ -6,7 +6,7 @@
 
     <groupId>com.garrettheel</groupId>
     <artifactId>moco-maven-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.8</version>
     <packaging>maven-plugin</packaging>
 
     <parent>
@@ -104,7 +104,7 @@
     </build>
 
     <properties>
-        <moco.version>0.6.4-SNAPSHOT</moco.version>
+        <moco.version>0.8</moco.version>
     </properties>
 
 </project>
