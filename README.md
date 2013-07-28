@@ -12,7 +12,7 @@ To get started, add the plugin to your `pom.xml`.
 <plugin>
     <groupId>com.garrettheel</groupId>
     <artifactId>moco-maven-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.8</version>
     <configuration>
         <port>8081</port>
         <configFile>config.json</configFile>
@@ -20,7 +20,7 @@ To get started, add the plugin to your `pom.xml`.
 </plugin>
 ```
 
-You may also need to add the Sonatype repository, depending on your setup.
+You may also need to add the Sonatype repository, depending on your environment.
 
 ```xml
 <pluginRepositories>
