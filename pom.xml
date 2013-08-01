@@ -6,7 +6,7 @@
 
     <groupId>com.garrettheel</groupId>
     <artifactId>moco-maven-plugin</artifactId>
-    <version>0.8</version>
+    <version>0.8.0</version>
     <packaging>maven-plugin</packaging>
 
     <parent>
@@ -27,8 +27,8 @@
     </licenses>
 
     <scm>
-        <url>git@github.com:GarrettHeel/moco-maven-plugin.git</url>
-        <connection>scm:git@github.com:GarrettHeel/moco-maven-plugin.git</connection>
+        <url>http://github.com/GarrettHeel/moco-maven-plugin.git</url>
+        <connection>scm:git:git://github.com/GarrettHeel/moco-maven-plugin.git</connection>
     </scm>
 
     <developers>
@@ -96,6 +96,19 @@
                         <phase>process-classes</phase>
                         <goals>
                             <goal>descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>
