@@ -2,6 +2,7 @@ package com.garrettheel.moco;
 
 import com.github.dreamhead.moco.bootstrap.StartArgs;
 import com.github.dreamhead.moco.runner.RunnerFactory;
+import com.github.dreamhead.moco.runner.ShutdownRunner;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -17,14 +18,18 @@ public class MocoStartMojo extends AbstractMocoExecutionMojo {
         checkParams();
 
         StartArgs startArgs = new StartArgs(port, stopPort, configFile.getAbsolutePath(), null, null);
-        new RunnerFactory(stopPort, MONITOR_KEY).createRunner(startArgs).run();
+        ShutdownRunner runner = new RunnerFactory(MONITOR_KEY).createRunner(startArgs);
+        runner.run();
+
+        // Store the shutdown port in a system property so we can use it to stop the server later
+        System.setProperty(SHUTDOWN_PORT_PROPERTY_NAME, Integer.valueOf(runner.shutdownPort()).toString());
     }
 
     @Override
     protected void checkParams() throws MojoExecutionException {
         super.checkParams();
 
-        if (stopPort == null || stopPort < 1) {
+        if (stopPort != null && stopPort < 0) {
             throw new MojoExecutionException("Invalid stop port number specified.");
         }
     }

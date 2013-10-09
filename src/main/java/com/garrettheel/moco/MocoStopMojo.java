@@ -17,12 +17,9 @@ public class MocoStopMojo extends AbstractMocoExecutionMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        if (stopPort == null || stopPort < 1) {
-            throw new MojoExecutionException("Stop port must be specified.");
-        }
-
+        Integer actualStopPort = Integer.valueOf(System.getProperty(SHUTDOWN_PORT_PROPERTY_NAME));
         try {
-            Socket socket = new Socket(InetAddress.getByName("127.0.0.1"), stopPort);
+            Socket socket = new Socket(InetAddress.getByName("127.0.0.1"), actualStopPort);
             socket.setSoLinger(false, 0);
 
             OutputStream outputStream = socket.getOutputStream();

@@ -12,6 +12,7 @@ import java.io.File;
 public abstract class AbstractMocoExecutionMojo extends AbstractMojo {
 
     protected static String MONITOR_KEY = "_MOCO_MAVEN_PLUGIN_MONITOR_KEY";
+    protected static String SHUTDOWN_PORT_PROPERTY_NAME = "moco.shutdown.port";
 
     /**
      * The file containing the JSON configuration.
@@ -28,7 +29,7 @@ public abstract class AbstractMocoExecutionMojo extends AbstractMojo {
     /**
      * The port to stop the server on (optional).
      */
-    @Parameter(required = false, defaultValue = "8082")
+    @Parameter(required = false)
     protected Integer stopPort;
 
     public File getConfigFile() {
