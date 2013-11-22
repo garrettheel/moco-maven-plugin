@@ -133,7 +133,7 @@
     </profiles>
 
     <properties>
-        <moco.version>0.9-SNAPSHOT</moco.version>
+        <moco.version>0.9</moco.version>
     </properties>
 
 </project>
