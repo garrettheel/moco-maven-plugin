@@ -6,7 +6,7 @@
 
     <groupId>com.garrettheel</groupId>
     <artifactId>moco-maven-plugin</artifactId>
-    <version>0.9</version>
+    <version>0.9.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <parent>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>com.github.dreamhead</groupId>
             <artifactId>moco-runner</artifactId>
-            <version>${moco.version}</version>
+            <version>${version}</version>
         </dependency>
         <!-- Test scoped -->
         <dependency>
@@ -131,9 +131,5 @@
             </build>
         </profile>
     </profiles>
-
-    <properties>
-        <moco.version>0.9</moco.version>
-    </properties>
 
 </project>
