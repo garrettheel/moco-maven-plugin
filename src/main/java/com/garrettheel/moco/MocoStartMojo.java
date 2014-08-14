@@ -17,7 +17,7 @@ public class MocoStartMojo extends AbstractMocoExecutionMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         checkParams();
 
-        StartArgs startArgs = new StartArgs(port, stopPort, configFile.getAbsolutePath(), null, null);
+        StartArgs startArgs = new StartArgs(port, stopPort, configFile.getAbsolutePath(), null, null, null);
         ShutdownRunner runner = new RunnerFactory(MONITOR_KEY).createRunner(startArgs);
         runner.run();
 

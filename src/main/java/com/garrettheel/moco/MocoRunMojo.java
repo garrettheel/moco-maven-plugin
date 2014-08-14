@@ -1,8 +1,8 @@
 package com.garrettheel.moco;
 
+import com.github.dreamhead.moco.bootstrap.StartArgs;
 import com.github.dreamhead.moco.runner.JsonRunner;
 import com.github.dreamhead.moco.runner.Runner;
-import com.google.common.base.Optional;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -24,7 +24,8 @@ public class MocoRunMojo extends AbstractMocoExecutionMojo {
 
         Runner runner;
         try {
-            runner = JsonRunner.newJsonRunnerWithStreams(Arrays.asList(new FileInputStream(configFile)), Optional.of(port));
+            StartArgs args = new StartArgs(port, null, null, null, null, null);
+            runner = JsonRunner.newJsonRunnerWithStreams(Arrays.asList(new FileInputStream(configFile)), args);
         } catch (FileNotFoundException e) {
             throw new MojoExecutionException("Unable to load config file", e);
         }

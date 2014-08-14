@@ -13,7 +13,7 @@ To get started, add the plugin to your `pom.xml`.
 <plugin>
     <groupId>com.garrettheel</groupId>
     <artifactId>moco-maven-plugin</artifactId>
-    <version>0.9-SNAPSHOT</version>
+    <version>0.9.2</version>
     <configuration>
         <port>8081</port>
         <configFile>config.json</configFile>
