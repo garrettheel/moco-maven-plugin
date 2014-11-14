@@ -1,14 +1,10 @@
 package com.garrettheel.moco;
 
-import com.garrettheel.moco.util.Waiter;
 import org.apache.http.client.fluent.Request;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
-
-import static com.garrettheel.moco.util.Waiter.Condition;
 
 public class MocoStartStopMojoTest extends AbstractMocoMojoTest {
 
@@ -38,7 +34,6 @@ public class MocoStartStopMojoTest extends AbstractMocoMojoTest {
         stopMojo.execute();
 
         assertTrue(isServerShutdown(mocoUri));
-
     }
 
     @Test
@@ -59,26 +54,6 @@ public class MocoStartStopMojoTest extends AbstractMocoMojoTest {
         stopMojo.execute();
 
         assertTrue(isServerShutdown(mocoUri));
-    }
-
-    private boolean isServerShutdown(final String uri) throws Exception {
-        getWaiter().until(new Condition() {
-            @Override
-            public boolean check() {
-                try {
-                    Request.Get(uri).execute();
-                    return false;
-                } catch (IOException e) {
-                    return true;
-                }
-            }
-        }, new Waiter.TimeOutCallBack() {
-            @Override
-            public void execute() {
-                fail();
-            }
-        });
-        return true;
     }
 
 }

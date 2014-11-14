@@ -35,4 +35,26 @@ public class MocoGlobalMojoTest extends AbstractMocoMojoTest {
         executorService.shutdownNow();
         executorService.awaitTermination(1, TimeUnit.SECONDS);
     }
+
+    public void testStart() throws Exception {
+        File pom = getTestFile("src/test/resources/test-global-pom.xml");
+        assertTrue(pom.exists());
+
+        MocoStartMojo startMojo = (MocoStartMojo) lookupMojo("start", pom);
+        MocoStopMojo stopMojo = (MocoStopMojo) lookupMojo("stop", pom);
+        String mocoUri = getMocoUri(startMojo.getPort());
+
+        assertNotNull(startMojo);
+        assertNotNull(stopMojo);
+
+        startMojo.execute();
+
+        waitForMocoStartCompleted(startMojo.getPort());
+        String getResponse = Request.Get(mocoUri).execute().returnContent().asString();
+        assertEquals("bar", getResponse);
+
+        stopMojo.execute();
+
+        assertTrue(isServerShutdown(mocoUri));
+    }
 }

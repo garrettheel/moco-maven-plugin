@@ -53,4 +53,23 @@ public abstract class AbstractMocoMojoTest extends AbstractMojoTestCase {
         return String.format(MOCO_URI, port);
     }
 
+    protected boolean isServerShutdown(final String uri) throws Exception {
+        getWaiter().until(new Condition() {
+            @Override
+            public boolean check() {
+                try {
+                    Request.Get(uri).execute();
+                    return false;
+                } catch (IOException e) {
+                    return true;
+                }
+            }
+        }, new Waiter.TimeOutCallBack() {
+            @Override
+            public void execute() {
+                fail();
+            }
+        });
+        return true;
+    }
 }
