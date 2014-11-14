@@ -1,7 +1,6 @@
 package com.garrettheel.moco;
 
 import org.apache.http.client.fluent.Request;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +26,8 @@ public class MocoRunMojoTest extends AbstractMocoMojoTest {
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(getMojoExecutionTask(runMojo));
+
+        waitForMocoStartCompleted(runMojo.getPort());
 
         String getResponse = Request.Get(getMocoUri(runMojo.getPort())).execute().returnContent().asString();
         assertEquals("foo", getResponse);
