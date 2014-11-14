@@ -8,8 +8,9 @@ public class Waiter {
 
     }
 
-    public Waiter(int interval) {
+    public Waiter(int interval, int max) {
         this.interval = interval;
+        this.max = max;
     }
 
     public void until(Condition condition) {
