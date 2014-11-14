@@ -20,6 +20,7 @@ public class Waiter {
     public void until(Condition condition, TimeOutCallBack back) {
         boolean flag = true;
         int count = 0;
+
         do {
             if (condition.check()) {
                 flag = false;
@@ -32,6 +33,7 @@ public class Waiter {
             }
             count += interval;
         } while (flag && count < max);
+
         if (flag) {
             if (back == null) {
                 throw new timeOutException();
