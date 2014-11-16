@@ -4,7 +4,7 @@ Overview
 This is a simple Maven plugin for managing a [Moco] (https://github.com/dreamhead/moco) server. It can be used to consistently
 run a Moco server on demand or to automatically launch the server during some part of the Maven lifecycle (such as `integration-test`).
 
-[![Build Status](https://travis-ci.org/htynkn/moco-maven-plugin.svg?branch=master)](https://travis-ci.org/htynkn/moco-maven-plugin)
+[![Build Status](https://travis-ci.org/GarrettHeel/moco-maven-plugin.svg?branch=master)](https://travis-ci.org/GarrettHeel/moco-maven-plugin)
 
 Usage
 =============
@@ -15,7 +15,7 @@ To get started, add the plugin to your `pom.xml`.
 <plugin>
     <groupId>com.garrettheel</groupId>
     <artifactId>moco-maven-plugin</artifactId>
-    <version>0.9.2</version>
+    <version>0.9.3</version>
     <configuration>
         <port>8081</port>
         <configFile>config.json</configFile>

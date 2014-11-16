@@ -17,13 +17,13 @@ public class Waiter {
         until(condition, null);
     }
 
-    public void until(Condition condition, TimeOutCallBack back) {
-        boolean flag = true;
-        int count = 0;
+    public void until(Condition condition, TimeoutCallback onTimeout) {
+        boolean passedCondition = false;
+        int elapsedMillis = 0;
 
         do {
             if (condition.check()) {
-                flag = false;
+                passedCondition = true;
             } else {
                 try {
                     Thread.sleep(interval);
@@ -31,27 +31,31 @@ public class Waiter {
                     e.printStackTrace();
                 }
             }
-            count += interval;
-        } while (flag && count < max);
+            elapsedMillis += interval;
+        } while (!passedCondition && elapsedMillis < max);
 
-        if (flag) {
-            if (back == null) {
-                throw new timeOutException();
+        if (!passedCondition) {
+            if (onTimeout == null) {
+                throw new TimeoutException();
             } else {
-                back.execute();
+                onTimeout.execute();
             }
         }
     }
 
     public interface Condition {
+        /**
+         * Check whether the condition passes.
+         * @return true for pass or false for fail
+         */
         boolean check();
     }
 
-    public interface TimeOutCallBack {
+    public interface TimeoutCallback {
         void execute();
     }
 
-    private class timeOutException extends RuntimeException {
+    private class TimeoutException extends RuntimeException {
     }
 }
 

@@ -8,11 +8,6 @@ import java.io.File;
 
 public class MocoStartStopMojoTest extends AbstractMocoMojoTest {
 
-    @Before
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
     @Test
     public void testStartStop() throws Exception {
         File pom = getTestFile("src/test/resources/test-pom.xml");

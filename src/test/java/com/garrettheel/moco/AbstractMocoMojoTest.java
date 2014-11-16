@@ -64,10 +64,10 @@ public abstract class AbstractMocoMojoTest extends AbstractMojoTestCase {
                     return true;
                 }
             }
-        }, new Waiter.TimeOutCallBack() {
+        }, new Waiter.TimeoutCallback() {
             @Override
             public void execute() {
-                fail();
+                fail("Moco server was not shutdown");
             }
         });
         return true;

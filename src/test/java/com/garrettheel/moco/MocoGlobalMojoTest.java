@@ -1,7 +1,6 @@
 package com.garrettheel.moco;
 
 import org.apache.http.client.fluent.Request;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -10,11 +9,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MocoGlobalMojoTest extends AbstractMocoMojoTest {
-
-    @Before
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
 
     @Test
     public void testRun() throws Exception {

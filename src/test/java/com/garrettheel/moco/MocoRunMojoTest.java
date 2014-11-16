@@ -11,11 +11,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MocoRunMojoTest extends AbstractMocoMojoTest {
 
-    @Before
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
     @Test
     public void testRun() throws Exception {
         File pom = getTestFile("src/test/resources/test-pom.xml");
