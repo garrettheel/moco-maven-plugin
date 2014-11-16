@@ -17,7 +17,7 @@ public abstract class AbstractMocoExecutionMojo extends AbstractMojo {
     /**
      * The file containing the JSON configuration.
      */
-    @Parameter(required = true)
+    @Parameter(required = false)
     protected File configFile;
 
     /**
@@ -31,6 +31,11 @@ public abstract class AbstractMocoExecutionMojo extends AbstractMojo {
      */
     @Parameter(required = false)
     protected Integer stopPort;
+    /**
+     * The global settings file.
+     */
+    @Parameter(required = false)
+    protected File globalFile;
 
     public File getConfigFile() {
         return configFile;
@@ -57,12 +62,18 @@ public abstract class AbstractMocoExecutionMojo extends AbstractMojo {
     }
 
     protected void checkParams() throws MojoExecutionException {
-        if (!configFile.exists()) {
+        if (fileNotExist(configFile)) {
             throw new MojoExecutionException("Moco config file does not exist.");
+        }
+        if (fileNotExist(globalFile)) {
+            throw new MojoExecutionException("Moco global config file does not exist.");
         }
         if (port == null || port < 1) {
             throw new MojoExecutionException("Invalid port number specified.");
         }
     }
 
+    protected boolean fileNotExist(File file) {
+        return file != null && !file.exists();
+    }
 }

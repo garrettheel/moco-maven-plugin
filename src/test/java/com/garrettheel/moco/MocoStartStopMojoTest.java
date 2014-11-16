@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.net.ConnectException;
 
 public class MocoStartStopMojoTest extends AbstractMocoMojoTest {
 
@@ -28,13 +27,13 @@ public class MocoStartStopMojoTest extends AbstractMocoMojoTest {
 
         startMojo.execute();
 
+        waitForMocoStartCompleted(startMojo.getPort());
         String getResponse = Request.Get(mocoUri).execute().returnContent().asString();
         assertEquals("foo", getResponse);
 
         stopMojo.execute();
 
         assertTrue(isServerShutdown(mocoUri));
-
     }
 
     @Test
@@ -55,22 +54,6 @@ public class MocoStartStopMojoTest extends AbstractMocoMojoTest {
         stopMojo.execute();
 
         assertTrue(isServerShutdown(mocoUri));
-
-    }
-
-    private boolean isServerShutdown(String uri) throws Exception {
-        // TODO: Use a better solution for "waiting" for the server to shutdown such as intervals with a retry
-        Thread.sleep(1000);
-
-        boolean shutdown = false;
-        try {
-            Request.Get(uri).execute();
-        } catch (ConnectException e) {
-            shutdown = true;
-        }
-
-        return shutdown;
-
     }
 
 }
