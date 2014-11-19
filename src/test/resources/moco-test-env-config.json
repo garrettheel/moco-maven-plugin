@@ -1,0 +1,10 @@
+[
+  {
+    "env": "bar",
+    "include": "src/test/resources/moco-test-bar-config.json"
+  },
+  {
+    "env": "foo",
+    "include": "src/test/resources/moco-test-config.json"
+  }
+]

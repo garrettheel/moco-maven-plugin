@@ -21,7 +21,7 @@ public class MocoStartMojo extends AbstractMocoExecutionMojo {
         if (configFile != null) {
             startArgs = new StartArgs(port, stopPort, configFile.getAbsolutePath(), null, null, null);
         } else {
-            startArgs = new StartArgs(port, stopPort, null, globalFile.getAbsolutePath(), null, null);
+            startArgs = new StartArgs(port, stopPort, null, globalFile.getAbsolutePath(), env, null);
         }
         ShutdownRunner runner = new RunnerFactory(MONITOR_KEY).createRunner(startArgs);
         runner.run();

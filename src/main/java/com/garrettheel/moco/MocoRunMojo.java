@@ -25,7 +25,7 @@ public class MocoRunMojo extends AbstractMocoExecutionMojo {
 
         Runner runner;
         try {
-            StartArgs args = new StartArgs(port, null, null, null, null, null);
+            StartArgs args = new StartArgs(port, null, null, null, env, null);
             if (configFile != null) {
                 runner = JsonRunner.newJsonRunnerWithStreams(Arrays.asList(new FileInputStream(configFile)), args);
             } else {
