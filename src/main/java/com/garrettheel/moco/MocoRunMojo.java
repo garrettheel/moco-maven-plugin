@@ -1,6 +1,7 @@
 package com.garrettheel.moco;
 
-import com.github.dreamhead.moco.bootstrap.StartArgs;
+import com.github.dreamhead.moco.bootstrap.arg.HttpArgs;
+import com.github.dreamhead.moco.bootstrap.arg.StartArgs;
 import com.github.dreamhead.moco.runner.JsonRunner;
 import com.github.dreamhead.moco.runner.Runner;
 import com.github.dreamhead.moco.runner.SettingRunner;
@@ -25,7 +26,7 @@ public class MocoRunMojo extends AbstractMocoExecutionMojo {
 
         Runner runner;
         try {
-            StartArgs args = new StartArgs(port, null, null, null, env, null);
+            StartArgs args = new HttpArgs.Builder().withPort(port).withEnv(env).build();
             if (configFile != null) {
                 runner = JsonRunner.newJsonRunnerWithStreams(Arrays.asList(new FileInputStream(configFile)), args);
             } else {

@@ -1,6 +1,7 @@
 package com.garrettheel.moco;
 
-import com.github.dreamhead.moco.bootstrap.StartArgs;
+import com.github.dreamhead.moco.bootstrap.arg.HttpArgs;
+import com.github.dreamhead.moco.bootstrap.arg.StartArgs;
 import com.github.dreamhead.moco.runner.RunnerFactory;
 import com.github.dreamhead.moco.runner.ShutdownRunner;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -18,10 +19,11 @@ public class MocoStartMojo extends AbstractMocoExecutionMojo {
         checkParams();
 
         StartArgs startArgs;
+        HttpArgs.Builder builder = new HttpArgs.Builder();
         if (configFile != null) {
-            startArgs = new StartArgs(port, stopPort, configFile.getAbsolutePath(), null, null, null);
+            startArgs = builder.withPort(port).withShutdownPort(stopPort).withConfigurationFile(configFile.getAbsolutePath()).build();
         } else {
-            startArgs = new StartArgs(port, stopPort, null, globalFile.getAbsolutePath(), env, null);
+            startArgs = builder.withPort(port).withShutdownPort(stopPort).withEnv(env).withSettings(globalFile.getAbsolutePath()).build();
         }
         ShutdownRunner runner = new RunnerFactory(MONITOR_KEY).createRunner(startArgs);
         runner.run();
