@@ -16,7 +16,8 @@
                 <artifactId>moco-maven-plugin</artifactId>
                 <configuration>
                     <port>8081</port>
-                    <globalFile>src/test/resources/moco-test-global-config.json</globalFile>
+                    <globalFile>src/test/resources/moco-test-env-config.json</globalFile>
+                    <env>foo</env>
                     <stopPort>8082</stopPort>
                 </configuration>
             </plugin>

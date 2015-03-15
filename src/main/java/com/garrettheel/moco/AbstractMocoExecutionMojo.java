@@ -37,28 +37,11 @@ public abstract class AbstractMocoExecutionMojo extends AbstractMojo {
     @Parameter(required = false)
     protected File globalFile;
 
-    public File getConfigFile() {
-        return configFile;
-    }
-
-    public void setConfigFile(File configFile) {
-        this.configFile = configFile;
-    }
+    @Parameter(required = false)
+    protected String env;
 
     public Integer getPort() {
         return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    public Integer getStopPort() {
-        return stopPort;
-    }
-
-    public void setStopPort(Integer stopPort) {
-        this.stopPort = stopPort;
     }
 
     protected void checkParams() throws MojoExecutionException {
@@ -67,6 +50,9 @@ public abstract class AbstractMocoExecutionMojo extends AbstractMojo {
         }
         if (fileNotExist(globalFile)) {
             throw new MojoExecutionException("Moco global config file does not exist.");
+        }
+        if (env == null && fileNotExist(globalFile)) {
+            throw new MojoExecutionException("The env is specified but global config file does not exist.");
         }
         if (port == null || port < 1) {
             throw new MojoExecutionException("Invalid port number specified.");
