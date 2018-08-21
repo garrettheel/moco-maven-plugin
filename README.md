@@ -42,7 +42,7 @@ Starting the server manually is easy! Simply run the following command:
 mvn com.garrettheel:moco-maven-plugin:run
 ```
 
-This will run the the server indefinitely until the process is terminated.
+This will run the server indefinitely until the process is terminated.
 
 ## Running during the maven lifecycle
 
